@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Các dòng xe - Porsche Việt Nam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #000;
+      padding: 10px 40px;
+      z-index: 1000;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo {
+      height: 70px;
+    }
+
+    nav {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff0000;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .arrow {
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 120%;
+      left: 0;
+      background: #181818;
+      min-width: 210px;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(255,60,60,0.12);
+      z-index: 2000;
+      padding: 10px 0;
+    }
+
+    .dropdown-menu li {
+      list-style: none;
+    }
+
+    .dropdown-menu a {
+      color: #fff;
+      padding: 10px 24px;
+      display: block;
+      text-decoration: none;
+      font-size: 15px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background: #ff3c3c;
+      color: #fff;
+    }
+
+    .dropdown.open .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown.open .arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Nền động */
+    .swiper {
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    .hero-container {
+      padding-top: 150px;
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+
+    .content-container {
+      max-width: 1100px;
+      margin: 0 auto 80px auto;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 60px 50px;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+    }
+
+    .content-container h2 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: #ff3c3c;
+      border-bottom: 2px solid #ff3c3c;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    .car-section {
+      margin-top: 40px;
+    }
+
+    .car-title {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #ff3c3c;
+    }
+
+    .car-desc {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    .car-info {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-top: 10px;
+    }
+
+    .car-img {
+      width: 320px;
+      max-width: 100%;
+      border-radius: 12px;
+      border: 2px solid #fff;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+      margin: 0;
+    }
+
+    .car-table {
+      flex: 1;
+      margin-top: 0;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: rgba(30,30,30,0.95);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(255,60,60,0.12);
+    }
+
+    .car-table th, .car-table td {
+      border-bottom: 1px solid #444;
+      padding: 16px 18px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .car-table th {
+      background: linear-gradient(90deg, #ff3c3c 60%, #c70000 100%);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #fff;
+    }
+
+    .car-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .car-table tr:nth-child(even) td {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .car-table td {
+      color: #eee;
+      font-weight: 500;
+    }
+
+    @media (max-width: 900px) {
+      .car-info {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+      }
+      .car-img {
+        width: 100%;
+        max-width: 100%;
+      }
+      .car-table th, .car-table td {
+        padding: 12px 8px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .content-container {
+        padding: 30px 20px;
+      }
+
+      th, td {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-top">
+      <img src="images/logo.png" alt="Porsche Logo" class="logo">
+
+    </div>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="gioithieu.html">Giới thiệu</a>
+      <div class="dropdown">
+        <a href="cacdongxe.html" class="dropdown-toggle">Các dòng xe <span class="arrow">&#9662;</span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#911">Porsche 911 Carrera</a></li>
+          <li><a href="#taycan">Porsche Taycan 4S</a></li>
+          <li><a href="#panamera">Porsche Panamera</a></li>
+          <li><a href="#macan">Porsche Macan</a></li>
+        </ul>
+      </div>
+      <a href="tramsac.html">Trạm sạc</a>
+      <a href="lienhe.html">Liên hệ</a>
+    </nav>
+  </header>
+  <!-- Nền động -->
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="images/bg1.jpg" alt="Nền 1"></div>
+      <div class="swiper-slide"><img src="images/bg2.jpg" alt="Nền 2"></div>
+      <div class="swiper-slide"><img src="images/bg3.jpg" alt="Nền 3"></div>
+    </div>
+  </div>
+
+    <!-- Nội dung chính -->
+  <div class="hero-container">
+    <div class="content-container">
+      <h2>Dòng xe tiêu biểu của Porsche tại Việt Nam</h2>
+
+      <!-- Porsche 911 -->
+      <div class="car-section" id="911">
+        <h3 class="car-title">Porsche 911 Carrera</h3>
+        <p class="car-desc">Biểu tượng thể thao với hiệu năng vượt trội và thiết kế kinh điển.</p>
+        <div class="car-info">
+          <img class="car-img" src="images/911.jpg" alt="Porsche 911 Carrera">
+          <table class="car-table">
+            <tr>
+              <th>Công suất</th>
+              <th>Tăng tốc</th>
+              <th>Tốc độ</th>
+              <th>Giá</th>
+              <th>CO₂</th>
+            </tr>
+            <tr>
+              <td>385 mã lực</td>
+              <td>4.2 giây</td>
+              <td>293 km/h</td>
+              <td>6.110.000.000</td>
+              <td>235</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Taycan -->
+      <div class="car-section" id="taycan">
+        <h3 class="car-title">Porsche Taycan 4S</h3>
+        <p class="car-desc">Mẫu xe điện tiên phong, kết hợp hiệu suất và công nghệ hiện đại.</p>
+        <div class="car-info">
+          <img class="car-img" src="images/taycan.jpg" alt="Porsche Taycan 4S">
+          <table class="car-table">
+            <tr>
+              <th>Công suất</th>
+              <th>Tăng tốc</th>
+              <th>Tốc độ</th>
+              <th>Giá</th>
+              <th>CO₂</th>
+            </tr>
+            <tr>
+              <td>571 mã lực</td>
+              <td>4.0 giây</td>
+              <td>250 km/h</td>
+              <td>5.720.000.000</td>
+              <td>0</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Panamera -->
+      <div class="car-section" id="panamera">
+        <h3 class="car-title">Porsche Panamera</h3>
+        <p class="car-desc">Sang trọng, mạnh mẽ, phù hợp cho doanh nhân thành đạt.</p>
+        <div class="car-info">
+          <img class="car-img" src="images/panamera.jpg" alt="Porsche Panamera">
+          <table class="car-table">
+            <tr>
+              <th>Công suất</th>
+              <th>Tăng tốc</th>
+              <th>Tốc độ</th>
+              <th>Giá</th>
+              <th>CO₂</th>
+            </tr>
+            <tr>
+              <td>330 mã lực</td>
+              <td>5.6 giây</td>
+              <td>270 km/h</td>
+              <td>5.310.000.000</td>
+              <td>210</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Macan -->
+      <div class="car-section" id="macan">
+        <h3 class="car-title">Porsche Macan</h3>
+        <p class="car-desc">SUV nhỏ gọn, linh hoạt, phù hợp cho đô thị hiện đại.</p>
+        <div class="car-info">
+          <img class="car-img" src="images/macan.jpg" alt="Porsche Macan">
+          <table class="car-table">
+            <tr>
+              <th>Công suất</th>
+              <th>Tăng tốc</th>
+              <th>Tốc độ</th>
+              <th>Giá</th>
+              <th>CO₂</th>
+            </tr>
+            <tr>
+              <td>265 mã lực</td>
+              <td>6.4 giây</td>
+              <td>232 km/h</td>
+              <td>3.120.000.000</td>
+              <td>212</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swiper Script -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      loop: true,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      effect: "fade"
+    });
+  </script>
+  <script>
+  // Dropdown logic
+  const dropdown = document.querySelector('.dropdown');
+  const toggle = document.querySelector('.dropdown-toggle');
+  const menu = document.querySelector('.dropdown-menu');
+
+  toggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    dropdown.classList.toggle('open');
+  });
+
+  // Đóng dropdown khi click ra ngoài hoặc chọn mục khác
+  document.addEventListener('click', function(e) {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('open');
+    }
+  });
+
+  // Đóng dropdown khi nhấn vào một mục trong menu
+  menu.querySelectorAll('a').forEach(item => {
+    item.addEventListener('click', (e) => {
+      dropdown.classList.remove('open');
+
+      // Cuộn mượt đến đúng vị trí, trừ chiều cao header
+      const href = item.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const header = document.querySelector('header');
+          const headerHeight = header ? header.offsetHeight : 0;
+          const rect = target.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const top = rect.top + scrollTop - headerHeight - 16; // -16 cho khoảng cách đẹp
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>

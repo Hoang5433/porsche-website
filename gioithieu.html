@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giới thiệu - Porsche Việt Nam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #000; /* header đậm hơn, không trong suốt */
+      padding: 10px 40px;
+      z-index: 1000;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo {
+      height: 70px;
+    }
+
+    nav {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff0000;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .swiper-slide {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-container {
+      max-width: 1100px;
+      margin: 160px auto 80px;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 60px;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+    }
+
+    .content-container h2 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: #ff3c3c;
+      border-bottom: 2px solid #ff3c3c;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+
+    .content-container p {
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    @media (max-width: 768px) {
+      .content-container {
+        padding: 30px 20px;
+        margin: 140px 20px 60px;
+      }
+
+      .content-container h2 {
+        font-size: 28px;
+      }
+
+      .content-container p {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-top">
+  <img src="images/logo.png" alt="Porsche Logo" class="logo">
+    </div>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="gioithieu.html">Giới thiệu</a>
+      <a href="cacdongxe.html">Các dòng xe</a>
+      <a href="tramsac.html">Trạm sạc</a>
+      <a href="lienhe.html">Liên hệ</a>
+    </nav>
+  </header>
+
+  <!-- Nền động -->
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="images/bg1.jpg" alt="Nền 1"></div>
+      <div class="swiper-slide"><img src="images/bg2.jpg" alt="Nền 2"></div>
+      <div class="swiper-slide"><img src="images/bg3.jpg" alt="Nền 3"></div>
+    </div>
+  </div>
+
+  <!-- Nội dung chính -->
+  <div class="content-container">
+    <h2>Giới thiệu về Porsche tại Việt Nam</h2>
+
+    <p>Porsche – thương hiệu xe thể thao hạng sang đến từ Đức – đã có mặt tại Việt Nam từ những năm đầu thập niên 2000. Trải qua hơn một thập kỷ phát triển, Porsche không ngừng khẳng định vị thế với những dòng xe đậm chất thể thao, sang trọng và hiệu suất cao.</p>
+
+    <p>Tại Việt Nam, Porsche hiện được phân phối chính hãng thông qua hệ thống Trung tâm Porsche tại TP. Hồ Chí Minh và Hà Nội. Các dịch vụ chính hãng bao gồm bán hàng, hậu mãi, dịch vụ bảo dưỡng và phụ tùng chính hãng đều được đảm bảo theo tiêu chuẩn toàn cầu.</p>
+
+    <p>Porsche cũng tích cực tham gia vào các hoạt động cộng đồng và sự kiện thể thao, tạo ra sân chơi dành cho những người yêu xe và yêu tốc độ như Porsche Roadshow, Porsche Driving Experience, và các buổi lái thử độc quyền.</p>
+
+    <p>Với tầm nhìn phát triển bền vững, Porsche đang từng bước mở rộng hệ sinh thái xe điện và giải pháp di chuyển thông minh tại thị trường Việt Nam, góp phần thúc đẩy xu hướng xanh – sạch – hiện đại.</p>
+  </div>
+
+  <!-- Swiper Script -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      loop: true,
+      effect: "fade",
+      speed: 1200,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      fadeEffect: {
+        crossFade: true
+      }
+    });
+  </script>
+</body>
+</html>
